@@ -1,0 +1,22 @@
+{
+  "name": "chat-app",
+  "version": "0.1.0",
+  "description": "",
+  "main": "server/server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start-watch":"nodemon server/server.js",
+    "start": "node server/server.js"
+  },
+  "engines": {
+    "node": "8.14"
+  },
+  "author": "moser-ss",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.16.4"
+  },
+  "devDependencies": {
+    "nodemon": "^1.18.9"
+  }
+}
