@@ -39,10 +39,11 @@ io.on('connection', (socket) => {
         console.log('User disconnected');
     })
 
-    socket.on('createMessage', (message) => {
+    socket.on('createMessage', (message, callback) => {
         console.log('New Message Created', message);
         const {from , text} = message
         io.emit('newMessage', generateMessage(from,text))
+        callback('This is from the server');
     })
 })
 server.listen(port, () => {
