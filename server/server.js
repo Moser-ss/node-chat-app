@@ -40,7 +40,10 @@ io.on('connection', (socket) => {
 
     socket.on('createMessage', (message) => {
         console.log('New Message Created', message);
-
+        io.emit('newMessage', {
+            ...message,
+            createAt: Date.now()
+        })
     })
 })
 server.listen(port, () => {

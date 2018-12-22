@@ -3,10 +3,6 @@ socket.on('connect', function () {
     console.log('Conneted to server');
 
 
-    socket.emit('createMessage', {
-        from: 'Super U',
-        text: 'Lets super code'
-    })
 });
 
 socket.on('disconnect', function () {
