@@ -31,9 +31,13 @@ io.on('connection', (socket) => {
 
     socket.emit('newMessage', {
         from: 'System',
-        text: 'User connected',
-        createAt: Date.now()
-    })
+        text: 'Welcome to the chat app'
+    });
+    socket.broadcast.emit('newMessage', {
+        from: 'System',
+        text: 'New user joined chat'
+    });
+
     socket.on('disconnect', () => {
         console.log('User disconnected');
     })
