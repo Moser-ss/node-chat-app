@@ -8,26 +8,17 @@ socket.on('disconnect', function () {
     console.log('Disconnected from server');
 })
 socket.on('newMessage', function (message) {
-    console.log('New Message:', message);
-    const { from , text, createAt} = message
-    const formattedTime = moment(createAt).format('HH:mm')
-    const li = jQuery('<li></li>');
-    li.text(`${from} ${formattedTime} : ${text}`)
-
-    jQuery('#messages').append(li)
+    message.createAt = moment(message.createAt).format('HH:mm')
+    const template = jQuery('#message-template').html();
+    const html = Mustache.render(template,message);
+    jQuery('#messages').append(html);
 });
 
 socket.on('newLocationMessage', function (message){
-    const { from , url, createAt} = message
-    const formattedTime = moment(createAt).format('HH:mm')
-    const li = jQuery('<li></li>')
-    const a = jQuery('<a target="_blank">My current location</a>')
-
-    li.text(`${from} ${formattedTime}: `);
-    a.attr('href',url);
-    li.append(a)
-
-    jQuery('#messages').append(li)
+    message.createAt = moment(message.createAt).format('HH:mm');
+    const template = jQuery('#location-message-template').html();
+    const html = Mustache.render(template,message)
+    jQuery('#messages').append(html)
 })
 jQuery('#message-form').on('submit', function(event){
     event.preventDefault()
