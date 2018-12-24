@@ -1,15 +1,14 @@
 require('./config/config.js');
 const path = require('path');
-const fs = require('fs');
 const express = require('express');
-const app = express()
-const server = require('http').Server(app)
+const app = express();
+const server = require('http').Server(app);
 const io = require('socket.io')(server);
 
 const {generateMessage, generateLocationMessage} = require('./utils/message.js');
 
 const publicPath = path.join(__dirname, '../public');
-const port = process.env.PORT
+const port = process.env.PORT;
 
 app.use(express.static(publicPath));
 
@@ -22,20 +21,20 @@ io.on('connection', (socket) => {
 
     socket.on('disconnect', () => {
         console.log('User disconnected');
-    })
+    });
 
     socket.on('createMessage', (message, callback) => {
         console.log('New Message Created', message);
-        const {from , text} = message
-        io.emit('newMessage', generateMessage(from,text))
+        const {from , text} = message;
+        io.emit('newMessage', generateMessage(from,text));
         callback('This is from the server');
-    })
+    });
 
     socket.on('createLocationMessage', (coords) => {
-        const { latitude, longitude } = coords
-        io.emit('newLocationMessage',generateLocationMessage('System', latitude, longitude))
-    })
-})
+        const { latitude, longitude } = coords;
+        io.emit('newLocationMessage',generateLocationMessage('System', latitude, longitude));
+    });
+});
 server.listen(port, () => {
     console.log(`Server started on port ${port}`);
-})
+});
