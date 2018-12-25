@@ -6,7 +6,7 @@ const server = require('http').Server(app);
 const io = require('socket.io')(server);
 
 const {generateMessage, generateLocationMessage} = require('./utils/message.js');
-
+const { isRealString } = require('./utils/validation.js');
 const publicPath = path.join(__dirname, '../public');
 const port = process.env.PORT;
 
@@ -18,6 +18,16 @@ io.on('connection', (socket) => {
     socket.emit('newMessage', generateMessage('System','Welcome to the chat app'));
 
     socket.broadcast.emit('newMessage', generateMessage('System','New user joined chat'));
+    
+    socket.on('join', (pararms, callback) => {
+        const {name, room } = pararms;
+
+        if (!isRealString(name) || !isRealString(room)) {
+            callback('Name and Room required');
+        }
+
+        callback();
+    });
 
     socket.on('disconnect', () => {
         console.log('User disconnected');
@@ -34,6 +44,7 @@ io.on('connection', (socket) => {
         const { latitude, longitude } = coords;
         io.emit('newLocationMessage',generateLocationMessage('System', latitude, longitude));
     });
+
 });
 server.listen(port, () => {
     console.log(`Server started on port ${port}`);

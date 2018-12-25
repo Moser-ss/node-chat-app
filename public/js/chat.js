@@ -18,8 +18,19 @@ function scrollToBottom() {
     }
 }
 socket.on('connect', function () {
-    // eslint-disable-next-line no-console
-    console.log('Conneted to server');
+    const params = jQuery.deparam(window.location.search);
+
+    socket.emit('join', params, function (err) {
+        if (err) {
+            alert(err);
+            window.location.href = '/';
+        } else {
+
+            // eslint-disable-next-line no-console
+            console.log('No error');
+            
+        } 
+    });
 });
 socket.on('disconnect', function () {
     // eslint-disable-next-line no-console
