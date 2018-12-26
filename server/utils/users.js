@@ -39,6 +39,11 @@ class Users {
         return this.users.find((user) => user.name === name);
     }
 
+    getRooms (){
+        const rooms = this.users.map( (user) => user.room);
+        return [ ... new Set(rooms)];
+    }
+
 }
 
 module.exports = {

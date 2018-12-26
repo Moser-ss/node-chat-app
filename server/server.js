@@ -19,11 +19,15 @@ io.on('connection', (socket) => {
     console.log('New user connected');
 
     socket.on('join', (pararms, callback) => {
-        let {name, room } = pararms;
+        let {name, room , listrooms } = pararms;
 
-        if (!isRealString(name) || !isRealString(room)) {
+        if (!isRealString(name) || ( !isRealString(room) && !isRealString(listrooms) ) ) {
             return callback('Name and Room required');
         }
+        if (!isRealString(room)) {
+            room = listrooms;
+        }
+        
         const user = users.getUserByName(name);
         if (user) {
             return callback('Name already taken');
@@ -37,6 +41,8 @@ io.on('connection', (socket) => {
 
         socket.emit('newMessage', generateMessage('System','Welcome to the chat app'));
         socket.broadcast.to(room).emit('newMessage', generateMessage('System',`${name} has joined chat.`));
+
+        io.emit('updateRooms',users.getRooms());
         callback();
     });
 
@@ -65,6 +71,10 @@ io.on('connection', (socket) => {
             const { latitude, longitude } = coords;
             io.to(user.room).emit('newLocationMessage',generateLocationMessage(user.name, latitude, longitude));
         }
+    });
+
+    socket.on('getUpdateRooms',() => {
+        io.emit('updateRooms',users.getRooms());
     });
 
 });

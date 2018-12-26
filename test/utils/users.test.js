@@ -78,4 +78,9 @@ describe('Users', () => {
         const user = users.getUserByName('notValid');
         expect(user).to.be.an('undefined');
     });
+
+    it('should return a list of rooms without duplicates', () => {
+        const rooms = users.getRooms();
+        expect(rooms).to.be.deep.equals(['invention','horse']);
+    });
 });
