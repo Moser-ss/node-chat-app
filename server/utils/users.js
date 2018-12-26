@@ -35,6 +35,10 @@ class Users {
         return this.getUserList(room).map((user) => user.name);
     }
 
+    getUserByName (name){
+        return this.users.find((user) => user.name === name);
+    }
+
 }
 
 module.exports = {

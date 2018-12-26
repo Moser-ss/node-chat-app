@@ -24,6 +24,10 @@ io.on('connection', (socket) => {
         if (!isRealString(name) || !isRealString(room)) {
             return callback('Name and Room required');
         }
+        const user = users.getUserByName(name);
+        if (user) {
+            return callback('Name already taken');
+        }
         room = room.toLowerCase();
         socket.join(room);
         users.removeUser(socket.id);
@@ -38,8 +42,8 @@ io.on('connection', (socket) => {
 
     socket.on('disconnect', () => {
         const user = users.removeUser(socket.id);
-        const {name, room } = user;
         if (user) {
+            const {name, room } = user;
             io.to(room).emit('updateUserList',users.getUserNameList(room));
             io.to(room).emit('newMessage', generateMessage('System', `${name} has left chat.`));
         }

@@ -67,4 +67,15 @@ describe('Users', () => {
         const usersList = users.getUserNameList('ananas');
         expect(usersList).to.be.deep.equals([]);
     });
+
+    it('should find user by name', () => {
+        const userToFind = users.users[0];
+        const user = users.getUserByName(userToFind.name);
+        expect(user).to.be.deep.equal(user);
+    });
+
+    it('should not find user by name', () => {
+        const user = users.getUserByName('notValid');
+        expect(user).to.be.an('undefined');
+    });
 });
