@@ -19,11 +19,12 @@ io.on('connection', (socket) => {
     console.log('New user connected');
 
     socket.on('join', (pararms, callback) => {
-        const {name, room } = pararms;
+        let {name, room } = pararms;
 
         if (!isRealString(name) || !isRealString(room)) {
             return callback('Name and Room required');
         }
+        room = room.toLowerCase();
         socket.join(room);
         users.removeUser(socket.id);
         users.addUser(socket.id, name, room );
