@@ -45,15 +45,21 @@ io.on('connection', (socket) => {
     });
 
     socket.on('createMessage', (message, callback) => {
-        console.log('New Message Created', message);
-        const {from , text} = message;
-        io.emit('newMessage', generateMessage(from,text));
+        const user = users.getUser(socket.id);
+        const {text} = message;
+        if (user && isRealString(text)) {
+            io.to(user.room).emit('newMessage', generateMessage(user.name,text));   
+        }
+
         callback('This is from the server');
     });
 
     socket.on('createLocationMessage', (coords) => {
-        const { latitude, longitude } = coords;
-        io.emit('newLocationMessage',generateLocationMessage('System', latitude, longitude));
+        const user = users.getUser(socket.id);
+        if(user){
+            const { latitude, longitude } = coords;
+            io.to(user.room).emit('newLocationMessage',generateLocationMessage(user.name, latitude, longitude));
+        }
     });
 
 });
