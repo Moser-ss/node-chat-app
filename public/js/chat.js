@@ -36,6 +36,16 @@ socket.on('disconnect', function () {
     // eslint-disable-next-line no-console
     console.log('Disconnected from server');
 });
+
+socket.on('updateUserList', function (users) {
+    const ol = jQuery('<ol></ol>');
+
+    users.forEach(function (user) {
+        ol.append(jQuery('<li></li>').text(user));
+    });
+
+    jQuery('#users').html(ol);
+});
 socket.on('newMessage', function (message) {
     message.createAt = moment(message.createAt).format('HH:mm');
     const template = jQuery('#message-template').html();
