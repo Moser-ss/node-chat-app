@@ -1,6 +1,12 @@
 language: node_js
+addons:
+  sonarcloud:
+    organization: moser-ss-github
+    token:
+        secure: Qg2Qdd3dvGnmcuEujDHvrDyYBQTcCEZC+sQ5OBuFc32fIpdA3qk4RIC4z1VDy1GDqLfowytc4gCB/MuUH1VSzi8N1J2Qou/9PHRlzb5nACLGl9i0cO2vAeT+GvyhHsZe3K6IRk6DKOBY+wtvtNQE6p6RAJhklgr5EcVPo0fPJO+U/oeGRb/E/j7htfmFNzQF1AgQ6mQ4miqehrr+dmPSY6VA/OuUNVUe9Sz7tpP2i5bajSCMp3SPcYG3U/HOuNLMpXLPyqBAHGTq18WT8BJb36lOtoqIDVSBfhT9t+HO+BNTvHxC4WWJCULAwVuWgyjagf2JoVrOBqszh9efkBMz7e2g8SwLGuuRGUV8CS3+q9ZKQDT1N7aLa8zUetVcM3AQeEdFwcJf7x3Bk7YgYGbloYxdTRZOb9dbNKNpUhrRcsxNFi4QXsapFxAWLMWVx9KnBJ14Ubd9oE/37xtAGAUuJ86ak1nETRCx8xkgGwlRylc3+WR1QU1INcUoaZemJLkpaHIvDIaLqyJHEu6CMWBS5Df+RPXQdUBCzkQAy6Fmo/lwlgpPdDG6NHmRBv1R0XiQA5OigHE4L1OInr9hSxthXv8CeVB+18AsjIXgiQG2EPkLxLH7zJNf00wSJ2pdIYBsD/rKO+x/tp1iIFRA5o6DkETc9rtQhP8PX3utm4T6ByQ=
 script:
 - npm run test
+- sonar-scanner
 deploy:
   provider: heroku
   api_key:
