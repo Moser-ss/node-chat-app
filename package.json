@@ -5,7 +5,8 @@
   "main": "server/server.js",
   "scripts": {
     "test": "mocha --recursive test/",
-    "lint" :"eslint .",
+    "test-coverage": "nyc --reporter=lcov --reporter=text-summary npm test",
+    "lint": "eslint .",
     "test-watch": "nodemon --exec 'npm test'",
     "start-watch": "nodemon server/server.js",
     "start": "node server/server.js"
@@ -24,6 +25,7 @@
     "chai": "^4.2.0",
     "eslint": "^5.11.0",
     "mocha": "^5.2.0",
-    "nodemon": "^1.18.9"
+    "nodemon": "^1.18.9",
+    "nyc": "^14.1.1"
   }
 }
