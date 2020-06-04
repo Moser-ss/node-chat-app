@@ -19,7 +19,7 @@
   "author": "moser-ss",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.16.4",
+    "express": "^4.17.1",
     "moment": "^2.24.0",
     "socket.io": "^2.2.0",
     "snyk": "^1.221.1"
