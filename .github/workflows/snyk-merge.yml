@@ -13,6 +13,7 @@ jobs:
         env:
           GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
           MERGE_LABELS: ""
-          MERGE_RETRIES: "1"
+          MERGE_RETRIES: "2"
           MERGE_RETRY_SLEEP: "10000"
+          MERGE_FILTER_AUTHOR: "snyk-bot"
           MERGE_DELETE_BRANCH: true
