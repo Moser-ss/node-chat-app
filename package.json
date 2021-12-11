@@ -12,7 +12,7 @@
     "start": "node server/server.js"
   },
   "engines": {
-    "node": "8.14"
+    "node": "16"
   },
   "author": "moser-ss",
   "license": "ISC",
@@ -25,7 +25,7 @@
     "chai": "^4.2.0",
     "eslint": "^5.11.0",
     "mocha": "^5.2.0",
-    "nodemon": "^1.18.9",
+    "nodemon": "^2.0.15",
     "nyc": "^14.1.1"
   }
 }
