@@ -2,6 +2,7 @@ require('./config/config.js');
 const path = require('path');
 const express = require('express');
 const app = express();
+// deepcode ignore HttpToHttps: The service is running behind a HTTPS loadbalancer
 const server = require('http').Server(app);
 const io = require('socket.io')(server);
 
@@ -33,6 +34,7 @@ io.on('connection', (socket) => {
             return callback('Name already taken');
         }
         room = room.toLowerCase();
+        // deepcode ignore PureMethodReturnValueIgnored: the join function the socket.io has a different behaviour 
         socket.join(room);
         users.removeUser(socket.id);
         users.addUser(socket.id, name, room );
