@@ -12,14 +12,14 @@
     "start": "node server/server.js"
   },
   "engines": {
-    "node": "16"
+    "node": "18"
   },
   "author": "moser-ss",
   "license": "ISC",
   "dependencies": {
-    "express": "4.17.2",
-    "moment": "2.29.1",
-    "socket.io": "4.4.1"
+    "express": "4.17.3",
+    "moment": "2.29.4",
+    "socket.io": "4.5.0"
   },
   "devDependencies": {
     "chai": "^4.3.6",
