@@ -12,19 +12,15 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Clone repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
         with:
           persist-credentials: 'false'
           fetch-depth: 0
 
-      - name: Get Node.js version
-        id: nvm
-        run: echo ::set-output name=NODE_VERSION::$(cat .nvmrc)
-
       - name: Setup Node.js
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v3
         with:
-          node-version: ${{ steps.nvm.outputs.NODE_VERSION }}
+          node-version-file: .nvmrc
 
       - name: Dependency installation
         run: npm ci
